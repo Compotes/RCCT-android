@@ -1,0 +1,4 @@
+#Fri May 12 14:45:19 UTC 2017
+base.0=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3
+renamed.0=classes.dex
+file.0=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex

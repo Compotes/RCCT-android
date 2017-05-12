@@ -1,0 +1,36 @@
+#Internal package file, do not edit.
+#Fri May 12 14:37:32 UTC 2017
+2.base=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_
+5.file=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_/res/drawable/ball.JPG
+5.set=ANDROID_RESOURCE
+3.base=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_
+6.file=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_50a113eacc16ee8cbb8c26196c22ef7b34d64fb5/classes.dex
+2.set=ANDROID_RESOURCE
+10.set=ANDROID_RESOURCE
+10.file=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_/res/raw/jetamnulacelychnulanula2.mp3
+4.base=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_
+7.file=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_/AndroidManifest.xml
+7.set=ANDROID_RESOURCE
+count=11
+0.file=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_/res/raw/ak47.mp3
+5.base=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_
+8.file=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_2b05bdac7de01c9af4c244e7b184cc210786be05/classes.dex
+4.set=ANDROID_RESOURCE
+6.base=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_50a113eacc16ee8cbb8c26196c22ef7b34d64fb5
+1.file=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_/res/raw/ak47b.mp3
+9.set=ANDROID_RESOURCE
+9.file=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_/res/raw/buzeran.mp3
+10.base=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_
+1.set=ANDROID_RESOURCE
+7.base=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_
+2.file=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_/res/drawable/icon.png
+6.set=DEX
+0.base=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_
+8.base=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_2b05bdac7de01c9af4c244e7b184cc210786be05
+3.file=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_/res/layout/color_blob_detection_surface_view.xml
+3.set=ANDROID_RESOURCE
+1.base=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_
+9.base=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_
+4.file=/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/res/resources-debug.ap_/resources.arsc
+8.set=DEX
+0.set=ANDROID_RESOURCE

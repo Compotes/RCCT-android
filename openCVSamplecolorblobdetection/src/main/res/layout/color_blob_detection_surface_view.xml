@@ -1,0 +1,151 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="155dp"
+        android:layout_height="wrap_content">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/connectLoshalo"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:text="connect Ferques"/>
+                <Button
+                    android:id="@+id/connectFerques"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:text="connect Vajda Loshalo"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="MAX VALUES"/>
+
+                <SeekBar
+                    android:id="@+id/maxSeekBarH"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <SeekBar
+                    android:id="@+id/maxSeekBarS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <SeekBar
+                    android:id="@+id/maxSeekBarV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="MIN VALUES"/>
+
+                <SeekBar
+                    android:id="@+id/minSeekBarScaleH"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <SeekBar
+                    android:id="@+id/minSeekBarScaleS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <SeekBar
+                    android:id="@+id/minSeekBarScaleV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <RadioButton
+                        android:id="@+id/firstColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="first goal color" />
+
+                    <RadioButton
+                        android:id="@+id/secondColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="ball color" />
+
+                    <RadioButton
+                        android:id="@+id/thirdColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="second goal color"/>
+                </RadioGroup>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RadioButton
+                        android:text="Attack first"
+                        android:id="@+id/attackFirst"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <RadioButton
+                        android:text="Attack Third"
+                        android:id="@+id/attackSecond"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </RadioGroup>
+
+                <CheckBox
+                    android:id="@+id/showScale"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="show scale"/>
+
+                <CheckBox
+                    android:id="@+id/showHSV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="show hsv"/>
+
+                <Button
+                    android:id="@+id/go"
+                    android:layout_width="match_parent"
+                    android:layout_height="155dp"
+                    android:text="GO!"/>
+
+                <Button
+                    android:id="@+id/kick"
+                    android:layout_width="match_parent"
+                    android:layout_height="155dp"
+                    android:text="Čik"/>
+
+                <Button
+                    android:id="@+id/debug"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:text="debug"/>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <org.opencv.android.JavaCameraView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/color_blob_detection_activity_surface_view" />
+
+</LinearLayout>
