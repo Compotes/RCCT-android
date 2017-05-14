@@ -672,7 +672,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             if (centersOfObjects != null && ball != null) {
                 Core.putText(mRgba, "x:" + String.valueOf(ball.x) + " left " + centersOfObjects.get(0).x + "right" + centersOfObjects.get(1).x,
                         new Point(100, 100), 1, 1, BALL_CONTOUR_COLOR);
-                if (centersOfObjects.get(0).x + 10 > ball.x && centersOfObjects.get(1).x - 10 < ball.x) {
+                if (centersOfObjects.get(0).x > ball.x && centersOfObjects.get(1).x < ball.x) {
                     if (nulaCelychNulaPlayer.isPlaying()) {
                         nulaCelychNulaPlayer.stop();
                     }
