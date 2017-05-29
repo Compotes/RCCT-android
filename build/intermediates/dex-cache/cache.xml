@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVLibrary2411/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="97452fc2caa6199eebaddc53476499a9a8788da4">
+        <dex dex="/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/pre-dexed/debug/classes_6d8fbe90c9eedd66660618e71c97c5964acfb454.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2e85326039aef3fa4a4ab69f446dfaef122569a1">
+        <dex dex="/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_2b05bdac7de01c9af4c244e7b184cc210786be05/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="/home/gkaretka/Compotes/2017/color-blob-detection-1-5-2017/openCVSamplecolorblobdetection/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_50a113eacc16ee8cbb8c26196c22ef7b34d64fb5/classes.dex" />
+    </item>
+
+</items>

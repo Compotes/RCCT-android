@@ -21,11 +21,6 @@ public class ColorBlobDetector {
     // Minimum contour area in percent for contours filtering
     private static double mMinContourArea = 0.3;
 
-    // Color radius for range checking in HSV color space
-    /*
-    public Scalar defaultColorRadius = new Scalar(25, 50, 50, 0);
-    public Scalar mColorRadius = new Scalar(25,50,50,0);
-    */
     private Mat mSpectrum = new Mat();
     private List<MatOfPoint> mContours = new ArrayList<MatOfPoint>();
 
@@ -82,14 +77,24 @@ public class ColorBlobDetector {
         mMinContourArea = area;
     }
 
-    public void process(Mat rgbaImage, Scalar hsvColor, Scalar minHsv) {
+    public void process(Mat rgbaImage, Scalar hsvColor, Scalar minHsv, boolean flipValues) {
         this.setHsvColor(hsvColor, minHsv);
         Imgproc.pyrDown(rgbaImage, mPyrDownMat);
         Imgproc.pyrDown(mPyrDownMat, mPyrDownMat);
 
         Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2HSV_FULL);
 
-        Core.inRange(mHsvMat, mLowerBound, mUpperBound, mMask);
+        if (flipValues) {
+            Mat tempM = new Mat();
+            Mat tempM2 = new Mat();
+            Core.inRange(mHsvMat, new Scalar(0, ColorBlobDetectionActivity.ballMaxMinVS[3], ColorBlobDetectionActivity.ballMaxMinVS[2]), mLowerBound, tempM);
+            Core.inRange(mHsvMat, mUpperBound, new Scalar(255, ColorBlobDetectionActivity.ballMaxMinVS[1], ColorBlobDetectionActivity.ballMaxMinVS[0]), tempM2);
+            Core.bitwise_or(tempM, tempM2, mMask);
+
+        } else {
+            Core.inRange(mHsvMat, mLowerBound, mUpperBound, mMask);
+        }
+
         Imgproc.dilate(mMask, mDilatedMask, new Mat());
 
         List<MatOfPoint> contours = new ArrayList<MatOfPoint>();

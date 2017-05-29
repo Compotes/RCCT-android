@@ -70,6 +70,52 @@
                     android:layout_height="wrap_content"
                     android:max="255" />
 
+                <!-- ONLY FOR BALL -->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="ONLY FOR BALL!"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="MIN VALUES"/>
+
+                <SeekBar
+                    android:id="@+id/BallMinSeekBarScaleS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <SeekBar
+                    android:id="@+id/BallMinSeekBarScaleV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="MAX VALUES"/>
+
+                <SeekBar
+                    android:id="@+id/BallMaxSeekBarScaleS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <SeekBar
+                    android:id="@+id/BallMaxSeekBarScaleV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="END ONLY FOR BALL"/>
+
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">

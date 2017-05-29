@@ -77,6 +77,9 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
     private SeekBar minSeekH, minSeekS, minSeekV;
     private SeekBar maxSeekH, maxSeekS, maxSeekV;
+    private SeekBar ballMinSeekV, ballMaxSeekV;
+    private SeekBar ballMinSeekS, ballMaxSeekS;
+    public static int ballMaxMinVS[] = {255, 255, 0, 0};
 
     private RadioButton firstColor, secondColor, thirdColor;
     private RadioButton attackFirst, attackSecond;
@@ -156,6 +159,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.color_blob_detection_surface_view);
 
@@ -169,6 +173,11 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         minSeekH = (SeekBar) findViewById(R.id.minSeekBarScaleH);
         minSeekS = (SeekBar) findViewById(R.id.minSeekBarScaleS);
         minSeekV = (SeekBar) findViewById(R.id.minSeekBarScaleV);
+
+        ballMaxSeekS = (SeekBar) findViewById(R.id.BallMaxSeekBarScaleS);
+        ballMaxSeekV = (SeekBar) findViewById(R.id.BallMaxSeekBarScaleV);
+        ballMinSeekS = (SeekBar) findViewById(R.id.BallMinSeekBarScaleS);
+        ballMinSeekV = (SeekBar) findViewById(R.id.BallMinSeekBarScaleV);
 
         firstColor = (RadioButton) findViewById(R.id.firstColor);
         secondColor = (RadioButton) findViewById(R.id.secondColor);
@@ -189,6 +198,50 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         nulaCelychNulaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.jetamnulacelychnulanula2);
         ak47Player = MediaPlayer.create(getApplicationContext(), R.raw.ak47b);
+
+        ballMaxSeekV.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                ColorBlobDetectionActivity.ballMaxMinVS[0] = i;
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+        ballMaxSeekS.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                ColorBlobDetectionActivity.ballMaxMinVS[1] = i;
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+        ballMinSeekV.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                ColorBlobDetectionActivity.ballMaxMinVS[2] = i;
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+        ballMinSeekS.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                ColorBlobDetectionActivity.ballMaxMinVS[3] = i;
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
 
         attackFirst.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -313,7 +366,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         maxSeekS.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                minSeekS.setMax(i - 10);
+                //minSeekS.setMax(i - 10);
                 updateMaxHsvValues(i, HSV_S_INDEX);
             }
             @Override
@@ -325,7 +378,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         maxSeekV.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                minSeekV.setMax(i - 10);
+                //minSeekV.setMax(i - 10);
                 updateMaxHsvValues(i, HSV_V_INDEX);
             }
             @Override
@@ -574,24 +627,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             attackColorIndex = 0;
         }
 
-        if (mIsColorSelected[0]) {
-            mDetector.process(mRgba, mBlobColorHsv[attackColorIndex], mBlobColorHsvMin[attackColorIndex]);
-            List<MatOfPoint> contours = mDetector.getContours();
-            if (contours != null) {
-                centersOfObjects = this.determineMinMax(contours, 30);
-
-                List<MatOfPoint> max = new ArrayList<MatOfPoint>();
-                Imgproc.drawContours(mRgba, contours, -1, GOAL_CONTOUR_COLOR);
-                Imgproc.drawContours(mRgba, max, -1, EXTREMES_CONTOUR_COLOR);
-
-                if (centersOfObjects != null) {
-                    goalCenterPoint = this.centerPoint(centersOfObjects);
-                }
-            }
-        }
-
         if (mIsColorSelected[1]) {
-            mDetector.process(mRgba, mBlobColorHsv[1], mBlobColorHsvMin[1]);
+            mDetector.process(mRgba, mBlobColorHsv[1], mBlobColorHsvMin[1], true);
             List<MatOfPoint> contours = mDetector.getContours();
 
             if (contours != null) {
@@ -602,8 +639,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                     int width = (int) (ballCentersOfObjects.get(0).x - ballCentersOfObjects.get(1).x);
                     ballCenterPoint = this.centerPoint(ballCentersOfObjects);
 
-                    Core.putText(mRgba, String.valueOf(width), new Point(10, 10), 1, 1, BIGGER_COLOR, 1);
-                    Core.putText(mRgba, String.valueOf(ballCenterPoint.y), new Point(10, 20), 1, 1, BIGGER_COLOR, 1);
+                    //Core.putText(mRgba, String.valueOf(width), new Point(10, 10), 1, 1, BIGGER_COLOR, 1);
+                    //Core.putText(mRgba, String.valueOf(ballCenterPoint.y), new Point(10, 20), 1, 1, BIGGER_COLOR, 1);
                     if (debugState) {
                         debugValues[(int) ballCenterPoint.y] += width;
                         numberOfDebugValues[(int) ballCenterPoint.y]++;
@@ -612,6 +649,22 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             }
 
             Imgproc.drawContours(mRgba, contours, -1, BALL_CONTOUR_COLOR);
+        }
+
+        if (mIsColorSelected[0]) {
+            mDetector.process(mRgba, mBlobColorHsv[attackColorIndex], mBlobColorHsvMin[attackColorIndex], false);
+            List<MatOfPoint> contours = mDetector.getContours();
+            if (contours != null) {
+                centersOfObjects = this.determineMinMax(contours, 30, ballCentersOfObjects);
+
+                List<MatOfPoint> max = new ArrayList<MatOfPoint>();
+                Imgproc.drawContours(mRgba, contours, -1, GOAL_CONTOUR_COLOR);
+                Imgproc.drawContours(mRgba, max, -1, EXTREMES_CONTOUR_COLOR);
+
+                if (centersOfObjects != null) {
+                    goalCenterPoint = this.centerPoint(centersOfObjects);
+                }
+            }
         }
 
         if (goalCenterPoint != null)
@@ -713,12 +766,14 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                 bluetoothAppendData[1] = "";
             }
 
-            byte[] bytes = out.getBytes();
-            try {
-                bluetoothOutputStream.write(bytes);
-                bluetoothOutputStream.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (bluetoothOutputStream != null) {
+                byte[] bytes = out.getBytes();
+                try {
+                    bluetoothOutputStream.write(bytes);
+                    bluetoothOutputStream.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -831,10 +886,10 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     }
 
 
-    private List<Point> determineMinMax(List<MatOfPoint> contours, int size) {
+    private List<Point> determineMinMax(List<MatOfPoint> contours, int size, List<Point> ballCentersOfObjects) {
         List<Point> centersOfObjects = new ArrayList<Point>();
 
-        MatOfPoint largestMat = this.findLargestMat(contours);
+        MatOfPoint largestMat = this.findLargestMat(contours, ballCentersOfObjects);
         double maxX = 0, maxY = 0,
                 minX = 9999, minY = 0;
         if (largestMat != null) {
@@ -862,7 +917,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         return null;
     }
 
-    private MatOfPoint findLargestMat(List<MatOfPoint> contours) {
+    private MatOfPoint findLargestMat(List<MatOfPoint> contours, List<Point> ballCentersOfObjects) {
         int sizeOfMatOfPoint = 0;
         MatOfPoint largestMat = null;
         for (Iterator<MatOfPoint> iterator = contours.iterator(); iterator.hasNext(); ) {
@@ -872,7 +927,33 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                 largestMat = currentMatOfPoint;
             }
         }
+
+        if (ballCentersOfObjects != null && largestMat != null) {
+            int width = (int) (ballCentersOfObjects.get(0).x - ballCentersOfObjects.get(1).x);
+
+            if (checkIsBullshit(largestMat,
+                    new Point(ballCentersOfObjects.get(1).x - width / 2, ballCentersOfObjects.get(1).y - width / 2),
+                    new Point(ballCentersOfObjects.get(0).x + width / 2, ballCentersOfObjects.get(0).y + width / 2))) {
+                Core.rectangle(mRgba, new Point(ballCentersOfObjects.get(1).x - width / 2, ballCentersOfObjects.get(1).y - width / 2),
+                        new Point(ballCentersOfObjects.get(0).x + width / 2, ballCentersOfObjects.get(0).y + width / 2),new Scalar(0,0,0));
+                return null;
+            }
+        }
+
         return largestMat;
+    }
+
+    private boolean checkIsBullshit(MatOfPoint obj, Point min, Point max) {
+        for (Iterator<Point> objIter =  obj.toList().iterator(); objIter.hasNext();) {
+            Point checkP = objIter.next();
+            if (checkP.x < min.x
+                    || checkP.y < min.y
+                    || checkP.x > max.x
+                    || checkP.y > max.y) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private Point centerPoint(List<Point> minMaxPoints) {
