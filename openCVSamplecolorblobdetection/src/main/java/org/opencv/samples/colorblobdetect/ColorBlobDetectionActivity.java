@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -58,12 +60,12 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     private static final double CAMERA_VIEW_ANGLE = 120;
     private static final double CAMERA_CENTER_PIXEL = WIDTH / 2;
     private static final double CAMERA_VIEW_ANGLE_COEFFICIENT = CAMERA_VIEW_ANGLE / WIDTH;
-    private static final int MIN_RANGE_SCALE_VALUE = 1;
     private static final int DEFAULT_ERROR_VALUE = 420;
     private static final String DEFAULT_SIGN = "+";
     private static final int HSV_H_INDEX = 0;
     private static final int HSV_S_INDEX = 1;
     private static final int HSV_V_INDEX = 2;
+    private static final int MINUS_ONE = -1;
     // end Constants
 
     private boolean mIsColorSelected[] = {false, false, false};
@@ -86,6 +88,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
     private CheckBox showScaleButton, showHSV;
     private Button connectLoshalo, connectFerques, go, kick, debug;
+
+    private Button saveData, loadData;
 
     private ColorBlobDetector mDetector;
 
@@ -196,8 +200,100 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         go = (Button) findViewById(R.id.go);
         kick = (Button) findViewById(R.id.kick);
 
+        saveData = (Button) findViewById(R.id.save_data);
+        loadData = (Button) findViewById(R.id.load_data);
+
         nulaCelychNulaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.jetamnulacelychnulanula2);
         ak47Player = MediaPlayer.create(getApplicationContext(), R.raw.ak47b);
+
+        saveData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("robocup color detector", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                // first Goal
+                if (mBlobColorHsv[0] != null && mBlobColorHsvMin[0] != null) {
+                    editor.putInt("goalFirstMaxH", (int) mBlobColorHsv[0].val[0]);
+                    editor.putInt("goalFirstMaxS", (int) mBlobColorHsv[0].val[1]);
+                    editor.putInt("goalFirstMaxV", (int) mBlobColorHsv[0].val[2]);
+                    editor.putInt("goalFirstMinH", (int) mBlobColorHsvMin[0].val[0]);
+                    editor.putInt("goalFirstMinS", (int) mBlobColorHsvMin[0].val[1]);
+                    editor.putInt("goalFirstMinV", (int) mBlobColorHsvMin[0].val[2]);
+                    Log.w("DebugA", "save first goal");
+                }
+
+                // second Goal
+                if (mBlobColorHsv[2] != null && mBlobColorHsvMin[2] != null) {
+                    editor.putInt("goalSecondMaxH", (int) mBlobColorHsv[2].val[0]);
+                    editor.putInt("goalSecondMaxS", (int) mBlobColorHsv[2].val[1]);
+                    editor.putInt("goalSecondMaxV", (int) mBlobColorHsv[2].val[2]);
+                    editor.putInt("goalSecondMinH", (int) mBlobColorHsvMin[2].val[0]);
+                    editor.putInt("goalSecondMinS", (int) mBlobColorHsvMin[2].val[1]);
+                    editor.putInt("goalSecondMinV", (int) mBlobColorHsvMin[2].val[2]);
+                    Log.w("DebugA", "save second goal");
+                }
+
+                // ball
+                if (mBlobColorHsv[1] != null && mBlobColorHsvMin[1] != null) {
+                    editor.putInt("ballMaxH", (int) mBlobColorHsv[1].val[0]);
+                    editor.putInt("ballMaxS", (int) mBlobColorHsv[1].val[1]);
+                    editor.putInt("ballMaxV", (int) mBlobColorHsv[1].val[2]);
+                    editor.putInt("ballMinH", (int) mBlobColorHsvMin[1].val[0]);
+                    editor.putInt("ballMinS", (int) mBlobColorHsvMin[1].val[1]);
+                    editor.putInt("ballMinV", (int) mBlobColorHsvMin[1].val[2]);
+
+                    editor.putInt("ballFirstMax", ballMaxMinVS[0]);
+                    editor.putInt("ballSecondMax", ballMaxMinVS[1]);
+                    editor.putInt("ballFirstMin", ballMaxMinVS[2]);
+                    editor.putInt("ballSecondMin", ballMaxMinVS[3]);
+                    Log.w("DebugA", "save ball");
+                }
+
+                editor.apply();
+                editor.commit();
+            }
+        });
+
+        loadData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("robocup color detector", Context.MODE_PRIVATE);
+
+                // first Goal
+                mBlobColorHsv[0].val[0] = sharedPreferences.getInt("goalFirstMaxH", MINUS_ONE);
+                mBlobColorHsv[0].val[1] = sharedPreferences.getInt("goalFirstMaxS", MINUS_ONE);
+                mBlobColorHsv[0].val[2] = sharedPreferences.getInt("goalFirstMaxV", MINUS_ONE);
+                mBlobColorHsvMin[0].val[0] = sharedPreferences.getInt("goalFirstMinH", MINUS_ONE);
+                mBlobColorHsvMin[0].val[1] = sharedPreferences.getInt("goalFirstMinS",  MINUS_ONE);
+                mBlobColorHsvMin[0].val[2] = sharedPreferences.getInt("goalFirstMinV",  MINUS_ONE);
+
+                // second Goal
+                mBlobColorHsv[2].val[0] = sharedPreferences.getInt("goalSecondMinH", MINUS_ONE);
+                mBlobColorHsv[2].val[1] = sharedPreferences.getInt("goalSecondMinS", MINUS_ONE);
+                mBlobColorHsv[2].val[2] = sharedPreferences.getInt("goalSecondMinV", MINUS_ONE);
+                mBlobColorHsvMin[2].val[0] = sharedPreferences.getInt("goalSecondMinH", MINUS_ONE);
+                mBlobColorHsvMin[2].val[1] = sharedPreferences.getInt("goalSecondMinS", MINUS_ONE);
+                mBlobColorHsvMin[2].val[2] = sharedPreferences.getInt("goalSecondMinV", MINUS_ONE);
+
+                // ball
+                mBlobColorHsv[1].val[0] = sharedPreferences.getInt("ballMaxH", MINUS_ONE);
+                mBlobColorHsv[1].val[1] = sharedPreferences.getInt("ballMaxS", MINUS_ONE);
+                mBlobColorHsv[1].val[2] = sharedPreferences.getInt("ballMaxV", MINUS_ONE);
+                mBlobColorHsvMin[1].val[0] = sharedPreferences.getInt("ballMinH", MINUS_ONE);
+                mBlobColorHsvMin[1].val[1] = sharedPreferences.getInt("ballMinS", MINUS_ONE);
+                mBlobColorHsvMin[1].val[2] = sharedPreferences.getInt("ballMinV", MINUS_ONE);
+
+                ballMaxMinVS[0] = sharedPreferences.getInt("ballFirstMax", MINUS_ONE);
+                ballMaxMinVS[1] = sharedPreferences.getInt("ballSecondMax", MINUS_ONE);
+                ballMaxMinVS[2] = sharedPreferences.getInt("ballFirstMin", MINUS_ONE);
+                ballMaxMinVS[3] = sharedPreferences.getInt("ballSecondMin", MINUS_ONE);
+
+                if (mBlobColorHsv[0].val[0] != -1) mIsColorSelected[0] = true;
+                if (mBlobColorHsv[1].val[0] != -1) mIsColorSelected[1] = true;
+                if (mBlobColorHsv[2].val[0] != -1) mIsColorSelected[2] = true;
+            }
+        });
 
         ballMaxSeekV.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -282,7 +378,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                             result += String.valueOf(i) + " " + String.valueOf(debugValues[i] / numberOfDebugValues[i]) + "\n\r";
                         }
                     }
-                    Log.w("debugA", result);
+                    Log.w("DebugA", result);
                 }
             }
         });
@@ -540,6 +636,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         for (int i = 0; i < mBlobColorRgba.length; i++) {
             mBlobColorRgba[i] = new Scalar(255);
             mBlobColorHsv[i] = new Scalar(255);
+            mBlobColorHsvMin[i] = new Scalar(255);
             mSpectrum[i] = new Mat();
         }
 

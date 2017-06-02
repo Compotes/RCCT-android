@@ -168,6 +168,18 @@
                     android:text="show hsv"/>
 
                 <Button
+                    android:id="@+id/save_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="155dp"
+                    android:text="Save data" />
+
+                <Button
+                    android:id="@+id/load_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="155dp"
+                    android:text="Load data" />
+
+                <Button
                     android:id="@+id/go"
                     android:layout_width="match_parent"
                     android:layout_height="155dp"
